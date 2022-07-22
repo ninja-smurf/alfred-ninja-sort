@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>se.ninjasmurf.sort</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>6AB49752-34A1-4383-93F8-120891809C85</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7B0500BA-22DA-45F0-8109-B0968D460494</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7B0500BA-22DA-45F0-8109-B0968D460494</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>96684002-6109-4149-8956-F1A239311C35</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F3F89D86-F05B-45EC-99CC-FC5BA3B2A294</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9DF768E1-9A23-4373-B5F4-04E07766BD16</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>96684002-6109-4149-8956-F1A239311C35</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D545553A-AD02-48E2-AEEC-21FB57F043F4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9DF768E1-9A23-4373-B5F4-04E07766BD16</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDC98E69-963E-4F50-919D-286ECDAA747B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D545553A-AD02-48E2-AEEC-21FB57F043F4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDC98E69-963E-4F50-919D-286ECDAA747B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>henrik@ninjasmurf.se</string>
+	<key>description</key>
+	<string>Sort paragraphs alphabetically</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Ninja Sort</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on sortList(theList)
+    set theIndexList to {}
+    set theSortedList to {}
+    repeat (length of theList) times
+        set theLowItem to ""
+        repeat with a from 1 to (length of theList)
+            if a is not in theIndexList then
+                set theCurrentItem to item a of theList as text
+                if theLowItem is "" then
+                    set theLowItem to theCurrentItem
+                    set theLowItemIndex to a
+                else if theCurrentItem comes before theLowItem then
+                    set theLowItem to theCurrentItem
+                    set theLowItemIndex to a
+                end if
+            end if
+        end repeat
+        set end of theSortedList to theLowItem
+        set end of theIndexList to theLowItemIndex
+    end repeat
+    return theSortedList
+end sortList
+
+
+on run
+  set theQuery to "{query}"
+  set theParagraphs to paragraphs of theQuery
+
+  set theParagraphs to sortlist(theParagraphs)
+
+  set AppleScript's text item delimiters to return
+  set theQuery to theParagraphs as string
+  set AppleScript's text item delimiters to ""
+
+  return theQuery
+
+end run</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D545553A-AD02-48E2-AEEC-21FB57F043F4</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>import sys
+import locale
+
+query = """{query}"""
+
+lines = query.splitlines()
+
+lines = list(filter(None, lines))
+
+strippedLines = [] * len(lines)
+for line in lines:
+	strippedLines.append(line.strip())
+
+query = "\n".join(strippedLines)
+
+sys.stdout.write(query)</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>96684002-6109-4149-8956-F1A239311C35</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>BDC98E69-963E-4F50-919D-286ECDAA747B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>38</integer>
+				<key>hotmod</key>
+				<integer>1835008</integer>
+				<key>hotstring</key>
+				<string>J</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>6AB49752-34A1-4383-93F8-120891809C85</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:scandinavian}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>5</integer>
+						<key>matchstring</key>
+						<string>sv_SE</string>
+						<key>outputlabel</key>
+						<string>for nordic</string>
+						<key>uid</key>
+						<string>F3F89D86-F05B-45EC-99CC-FC5BA3B2A294</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>others</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>7B0500BA-22DA-45F0-8109-B0968D460494</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>import sys
+import locale
+
+query = """{query}"""
+
+lines = query.splitlines()
+
+lines = list(filter(None, lines))
+
+strippedLines = [] * len(lines)
+for line in lines:
+	strippedLines.append(line.strip())
+
+
+sortedLines = sorted(strippedLines, key=str.lower)
+
+query = "\n".join(sortedLines)
+sys.stdout.write(query)</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9DF768E1-9A23-4373-B5F4-04E07766BD16</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Will sort lines of selected text alphabetically and paste them. Thats pretty much it.</string>
+	<key>uidata</key>
+	<dict>
+		<key>6AB49752-34A1-4383-93F8-120891809C85</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>11</integer>
+			<key>xpos</key>
+			<real>55</real>
+			<key>ypos</key>
+			<real>190</real>
+		</dict>
+		<key>7B0500BA-22DA-45F0-8109-B0968D460494</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>9</integer>
+			<key>note</key>
+			<string>This is needed to decide if another sort is nessecary as I could not get Python to sort the scandinavian letters properly. It seems impossible to set the locale to anything but en_US.</string>
+			<key>xpos</key>
+			<real>265</real>
+			<key>ypos</key>
+			<real>210</real>
+		</dict>
+		<key>96684002-6109-4149-8956-F1A239311C35</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Pythin script to trim from whitespaces in beginning and end of lines.</string>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+		<key>9DF768E1-9A23-4373-B5F4-04E07766BD16</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>7</integer>
+			<key>note</key>
+			<string>Pythin script to trim and sort lines in ascending order.</string>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>285</real>
+		</dict>
+		<key>BDC98E69-963E-4F50-919D-286ECDAA747B</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>5</integer>
+			<key>note</key>
+			<string>Paste to frontmost window.</string>
+			<key>xpos</key>
+			<real>935</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>D545553A-AD02-48E2-AEEC-21FB57F043F4</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>3</integer>
+			<key>note</key>
+			<string>Apple script wich will sort scandinavian letters properly.</string>
+			<key>xpos</key>
+			<real>650</real>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>false</string>
+				<key>placeholder</key>
+				<string>true or false</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>This flag will decide what script the sorting is based on. Sorting for scandinavian letters is most likely slower since it uses two different scripts.</string>
+			<key>label</key>
+			<string>Use scandinavian letters</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>scandinavian</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/ninja-smurf/alfred-ninja-sort</string>
+</dict>
+</plist>
