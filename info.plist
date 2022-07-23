@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>se.ninjasmurf.sort</string>
+	<string>se.ninjasmurf.alfred.ninjasort</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
@@ -89,7 +89,7 @@
 	<key>createdby</key>
 	<string>henrik@ninjasmurf.se</string>
 	<key>description</key>
-	<string>Sort paragraphs alphabetically</string>
+	<string>Sort lines alphabetically</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -325,7 +325,7 @@ sys.stdout.write(query)</string>
 			<key>colorindex</key>
 			<integer>11</integer>
 			<key>xpos</key>
-			<real>55</real>
+			<real>70</real>
 			<key>ypos</key>
 			<real>190</real>
 		</dict>
@@ -334,7 +334,7 @@ sys.stdout.write(query)</string>
 			<key>colorindex</key>
 			<integer>9</integer>
 			<key>note</key>
-			<string>This is needed to decide if another sort is nessecary as I could not get Python to sort the scandinavian letters properly. It seems impossible to set the locale to anything but en_US.</string>
+			<string>Since I can't get the Python script to sort Scandinavian letters correctly two different scripts will be used.</string>
 			<key>xpos</key>
 			<real>265</real>
 			<key>ypos</key>
@@ -391,20 +391,18 @@ sys.stdout.write(query)</string>
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>false</string>
-				<key>placeholder</key>
-				<string>true or false</string>
+				<false/>
 				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<false/>
+				<key>text</key>
+				<string>Scandinavian letters</string>
 			</dict>
 			<key>description</key>
 			<string>This flag will decide what script the sorting is based on. Sorting for scandinavian letters is most likely slower since it uses two different scripts.</string>
 			<key>label</key>
-			<string>Use scandinavian letters</string>
+			<string>Special characters</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>checkbox</string>
 			<key>variable</key>
 			<string>scandinavian</string>
 		</dict>
@@ -412,8 +410,8 @@ sys.stdout.write(query)</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>webaddress</key>
-	<string>https://github.com/ninja-smurf/alfred-ninja-sort</string>
+	<string>www.ninjasmurf.se</string>
 </dict>
 </plist>
